@@ -119,6 +119,17 @@
     ul.insertBefore(li, ul.children[0]);
     // 把文本域清空
     text.value = '';
+    let obj= {
+      content:content,
+      time:time
+    }
+    // 把这个数据放到数组里面
+    datas.unshift(obj);//把数据从数组的最前面插入
+    //把一个对象转换为json格式的字符串
+    let json= JSON.stringify(datas);
+    // 把数组存储到localStorage里面
+    localStorage.setItem('wbshuju',json);
+    
   }
 </script>
 
