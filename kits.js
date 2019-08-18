@@ -40,6 +40,14 @@ kits.randomColor = function(){
   var b = kits.randomInt(0, 255);
   return 'rgb(' + r + ',' + g + ',' + b + ')';
 }
+//获得随机十六进制颜色
+kits.randomHexColor = function() { 
+  let result = '#';
+  for (var i = 0; i < 6; i++) {
+      result += Math.floor(Math.random() * 16).toString(16);
+  }
+  return result;
+}
 
 // 常见的给id的方式1
 // 当前时间戳 + 大的随机数
