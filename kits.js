@@ -33,6 +33,13 @@ kits.formatDate = function () {
 kits.randomInt = function(n,m){
   return Math.floor(Math.random() * (m-n+1) + n);
 }
+//随机颜色
+kits.randomColor = function(){
+  var r = kits.randomInt(0, 255);
+  var g = kits.randomInt(0, 255);
+  var b = kits.randomInt(0, 255);
+  return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
 
 // 常见的给id的方式1
 // 当前时间戳 + 大的随机数

@@ -100,7 +100,24 @@
   let btn = document.querySelector('.weibo-btn');
   let text = document.querySelector('.weibo-text');
   let ul = document.querySelector('.weibo-list');
-  var datas = [];
+  // 把数据从本地存储中读取
+  let datas = localStorage.getItem('wbshuju');
+//son格式的字符串转换为js的对象
+  datas = JSON.parse(datas);
+  datas =datas|| [];
+// 需要在一开始根据旧的数据把旧数据展示
+datas.forEach(function(e,i){
+  // forEach的作用是遍历前面的这个数组
+  // 只要动态生成元素，就会把原来的数据展示出来
+  let li = document.createElement('li');
+  li.innerHTML = '<p class="content">' + e.content + '</p>' +
+      '<span class="del">删除</span>' +
+      '<span class="time">' + e.time + '</span>';
+    ul.appendChild(li);//把该元素添加到页面中
+})
+
+
+
   btn.onclick = function () {
     let content = text.value; // 获取表单元素的内容,使用 value属性
     if (content.trim().length === 0) { //trim清除内容两边的空格
