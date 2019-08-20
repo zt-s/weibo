@@ -1,2 +1,7 @@
 # weibo
- 本地存储版本小娜
+# js调用
+
+~~~js
+<script src="./kits.js"></script>
+~~~
+

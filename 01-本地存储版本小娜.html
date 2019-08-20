@@ -137,6 +137,8 @@ datas.forEach(function(e,i){
     // 把文本域清空
     text.value = '';
     let obj= {
+      // 需要一个id以便在删除的时候能够找到这条数据
+      id: id,
       content:content,
       time:time
     }
@@ -148,6 +150,32 @@ datas.forEach(function(e,i){
     localStorage.setItem('wbshuju',json);
     
   }
+  // 所有的元素都是动态生成的，有可能一开始获取不到的，需要使用委托的方式实现删除,利用冒泡事件
+  ul.addEventListener('click',function(e){
+    //判断的是元素身上是否包含某个类名，e 事件源target监听span
+    if(e.target.classList.contains('del')){
+       //就是点击了删除，e.target.parentNode找到span的父元素，ul.removeChild删除ul的子元素
+      ul.removeChild(e.target.parentNode);
+      // 不仅要删除li，还要删除本地存储中对应的数据
+      /* 删除数据的常见的办法：给数据设置一个不会重复的id，根据id到数组里面查找
+          需要在生成数据的时候，先给id,
+          然后在我们生成结构的时候，把id存储到删除这个span的自定义属性身上
+      */
+      // 获取点击的删除身上的id
+      let id = e.target.dataset.id;
+      //  把本地存储中的对应的数据移除
+      // 先从 datas 数组里面把对应的数据，删除
+      datas.forEach(function (e, i) {
+        if (e.id == id) {
+          //数组.splice(从哪里开始删除,删除多少个);
+          datas.splice(i, 1);
+        }
+      });
+       // 把新的datas覆盖回本地存储里面
+       let json = JSON.stringify(datas);
+      localStorage.setItem('wbshuju', json);
+    }
+  })
 </script>
 
 </html>
