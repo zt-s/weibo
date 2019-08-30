@@ -7,14 +7,38 @@
   <title>Document</title>
 </head>
 <body>
-  <input type="button" value="点击" id="but">
+  <!-- <input type="button" value="点击" id="but"> -->
 </body>
 <script src="./kits.js"></script>
 <script>
-let but =document.querySelector('#but')
-let body= document.body;
-but.onclick=function(){
-  body.style.backgroundColor=kits.randomColor();
+// let but =document.querySelector('#but')
+// let body= document.body;
+// but.onclick=function(){
+//   body.style.backgroundColor=kits.randomColor();
+// }
+
+let arr=[{id:1,'张三':'12'},{id:2,'李四':'18'},{id:3,'李8':'18'}];
+kits.saveLocalDataArray('bbb',arr);
+//给本地存储里面指定键为(key)的数组数据，追加一个数据对象，
+// kits.saveLocalDataArray( 'aaa',j)
+// kits.appendDataIntoArray=function(){
+//   let arr= kits.getLocalDataArray('aaa');
+//   arr.push({'张三':'18'});
+//   kits.saveLocalDataArray('aaa',arr)
+// }
+// kits.appendDataIntoArray('aaa',{'张三':'19'});
+// let bbb=kits.getLocalDataArray('aaa')
+// console.log(bbb)
+
+
+// kits.deleteLocalDataById('bbb',1);
+
+let bbb=kits.modifyLocalDataById('bbb',10,{id:6,'王 五':'15'});
+console.log(bbb);
+if(fanKui){
+  alert('该id不存在');
+}else{
+  alert('修改成功');
 }
 </script>
 </html>

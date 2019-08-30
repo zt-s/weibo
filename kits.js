@@ -61,3 +61,73 @@ kits.getId = function(){
   let id = time + '' + r;
   return id;
 }
+// 从本地存储中读取复杂数据
+/**
+ *@description 从本地存储中读取复杂数据
+ * @param{string}要以哪个键从本地存储中读取数据
+ * @returns{object}读取出来的，是JSON转换的js复杂数据
+ */
+kits.getLocalDataArray=function(key){
+  let json = localStorage.getItem(key);
+  let arr = JSON.parse(json);
+  return arr || [];
+}
+// 把复杂数据存储在本地存储中
+/**
+ * @description 把复杂数据存储到本地里面，默认是存储json格式字符串
+ * @param{string} key 存储到本地里面的键
+ * @param{object} obj 要存储的复杂数据
+ * @returns undefined 返回
+ */
+kits.saveLocalDataArray=function(key,obj){
+let json=JSON.stringify(obj);
+localStorage.setItem(key,json);
+}
+//给本地存储里面指定键为(key)的数组数据，追加一个数据对象，执行之后是jq对象
+/**
+ * @description 给本地存储里面指定键(key)的数组数据，追加一个数据对象
+ * @param{string} key 存储到本地里面的键
+ * @param{object} data 追加到localstorage的数据
+ */
+kits.appendDataIntoArray=function(key,data){
+  let arr= kits.getLocalDataArray(key);
+  arr.push(data);
+  kits.saveLocalDataArray(key,arr);
+}
+//根据对应的id从localStorage指定键(key)的数组中删除一条数据
+/**
+ * @description 根据对应的id从本地存储里面指定键(key)的数组数据中，删除一条数据
+ * @param{string} key 存储到本地里面的键
+ * @param{object} id 需要删除的数据的id
+ */
+kits.deleteLocalDataById=function(key,id){
+  let arr=kits.getLocalDataArray(key);
+  let pitch=arr.find((e,i)=>{
+    return arr[i].id==id;
+  })
+  let index= arr.indexOf(pitch)
+  arr.splice(index,1);
+  kits.saveLocalDataArray(key,arr);
+}
+//根据对应的id从localStorage指定键(key)的数组中,修改一条数据
+/**
+ * @description 根据对应的id从本地存储里面指定键(key)的数组数据中，修改一条数据
+ * @param{string} key 存储到本地里面的键
+ * @param{object} id 需要修改的数据的id
+ * @param{object} data: 把通过id找到的数据，修改为你传入的data
+ */
+kits.modifyLocalDataById=function(key,id,data){
+  let arr=kits.getLocalDataArray(key);
+   fanKui=false;
+  let pitch=arr.find((e,i)=>{
+    return arr[i].id==id;
+  })
+  let index= arr.indexOf(pitch);
+  if(index!==-1){
+    arr.splice(index,1,data);
+    kits.saveLocalDataArray(key,arr);
+  }else{
+      fanKui=true;
+    }
+  return fanKui;
+}
